@@ -8,7 +8,7 @@ import certifi
 app = Flask(__name__)
 
 # Create a directory to store CAPTCHA images
-UPLOAD_FOLDER = '/opt/flask_form/captcha_images/'
+UPLOAD_FOLDER = './captcha_images/'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -47,9 +47,10 @@ def captcha_form():
     message = None
     
     if request.method == 'POST':
+        
         captcha_text = request.form.get('captcha')
         image_content = request.form.get('image_content')
-        
+        print(captcha_text)
         if image_content:
             # Decode the base64 image content
             image_content = base64.b64decode(image_content)
@@ -61,7 +62,7 @@ def captcha_form():
                 message = "Error saving CAPTCHA image"
         else:
             message = "No image data available"
-    
+        print(message)
     # Get new CAPTCHA image for both GET and POST requests
     captcha_image, image_content = get_captcha_image()
     
