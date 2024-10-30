@@ -8,7 +8,7 @@ import certifi
 app = Flask(__name__)
 
 # Create a directory to store CAPTCHA images
-UPLOAD_FOLDER = 'captcha_images'
+UPLOAD_FOLDER = '/opt/flask_form/captcha_images/'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -31,7 +31,7 @@ def save_captcha_image(image_content, captcha_text):
     try:
         # Create filename with timestamp to avoid duplicates
          
-        filename = f"{captcha_text}.png"
+        filename = f"{captcha_text}.png".lower()
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         
         # Save the image
